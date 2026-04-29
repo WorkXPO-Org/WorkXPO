@@ -30,8 +30,8 @@
 
   ## Desenvolvedores
     - **Bruno da Silva**
-    - **Rafael Oliveira**
     - **Lázaro Kauã**
+    - **Rafael Oliveira**
     - **Valmir Orçai**
 
 </details>
@@ -66,8 +66,8 @@ The platform is being built to provide experiences for both students and compani
 ## Developers
 
 - **Bruno da Silva**
-- **Rafael Oliveira**
 - **Lázaro Kauã**
+- **Rafael Oliveira**
 - **Valmir Orçai**
 
 ---
