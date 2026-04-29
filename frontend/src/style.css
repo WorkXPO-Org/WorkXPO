@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui;
+  --font-serif: "Playfair Display", serif;
+
   --color-primary: #48cae4;
   --color-secondary: #ecfeff;
   --color-accent: #22d3ee;
