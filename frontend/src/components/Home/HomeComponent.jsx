@@ -1,22 +1,24 @@
 import Header from "../Header";
 import AboutProject from "./AboutProject";
 import Hero from "./Hero";
+import FeaturedProjects from "./FeaturedProjects";
 
 export default function Home() {
   return (
-    <>
+    <main>
       <Header />
       <div className="home-container">
         <Hero />
-        <AboutProject />
+
+        <div className="flex flex-col md:flex-row gap-6">
+          <div className="md:w-1/2">
+            <AboutProject />
+          </div>
+          <div className="md:w-1/2">
+            <FeaturedProjects></FeaturedProjects>
+          </div>
+        </div>
       </div>
-    </>
+    </main>
   );
 }
-
-// @layer card-container {
-
-//   .about-container {
-//     @apply;
-//   }
-// }

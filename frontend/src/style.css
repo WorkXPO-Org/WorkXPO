@@ -20,16 +20,12 @@
   }
 
   .card-project {
-    /* Cores e Fundo */
     @apply bg-cyan-brighter text-dark;
 
-    /* Forma e Espaçamento */
     @apply rounded-xl p-10;
 
-    /* Comportamento do Texto */
     @apply text-justify;
 
-    /* Estilização automática dos elementos internos (Opcional mas poderoso) */
     h2 {
       @apply text-3xl font-bold;
     }
@@ -41,5 +37,11 @@
     ul {
       @apply list-disc ml-6 space-y-2 mt-4;
     }
+  }
+
+  .project-card-container {
+    @apply bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm;
+
+    @apply flex flex-col h-full transition-shadow hover:shadow-md;
   }
 }

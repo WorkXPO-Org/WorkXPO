@@ -2,7 +2,7 @@ export default function Hero() {
   const innovationImage = "idea.svg";
 
   return (
-    <section className="flex flex-row items-center justify-between mx-auto max-w-6xl min-h-[70vh] gap-10 text-justify">
+    <section className="flex flex-row items-center justify-around mx-auto max-w-6xl min-h-[70vh] gap-10 text-justify">
       <div className="flex-1">
         <h1 className="text-5xl font-extrabold text-dark mb-6">
           Sua Inovação começa aqui!

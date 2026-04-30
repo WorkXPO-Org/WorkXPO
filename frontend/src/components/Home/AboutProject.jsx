@@ -27,9 +27,9 @@ export default function AboutProject() {
   ];
 
   return (
-    <section className="bg-cyan-brighter w-150 p-10 rounded-xl text-justify text-dark">
-      <h2 className="text-3xl font-bold">Sobre o Projeto</h2>
-      <h3 className="mt-5 mb-2 text-xl font-bold">O que é o WorkXPO?</h3>
+    <section className="card-project">
+      <h2>Sobre o Projeto</h2>
+      <h3>O que é o WorkXPO?</h3>
       <p>
         O WorkXPO é uma ponte entre o mundo acadêmico e o mercado corporativo. A
         plataforma foi idealizada para expor projetos acadêmicos inovadores,
@@ -37,14 +37,14 @@ export default function AboutProject() {
         institucional, infraestrutura e investimento financeiro.
       </p>
 
-      <h3 className="mt-5 mb-2 text-xl font-bold">Funcionalidades</h3>
+      <h3>Funcionalidades</h3>
       <div>
-        <p className="mb-1">
+        <p>
           A plataforma está sendo desenvolvida para oferecer uma experiência
           fluida tanto para estudantes quanto para empresas:
         </p>
 
-        <ul className="list-disc list-inside">
+        <ul>
           {FUNCTIONALITIES_ITEMS.map((items) => (
             <li key={items.label}>
               <span className="font-semibold">{items.label}: </span>
