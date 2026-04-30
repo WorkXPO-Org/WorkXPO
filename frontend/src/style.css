@@ -5,10 +5,41 @@
   --font-serif: "Playfair Display", serif;
 
   --color-primary: #48cae4;
+  --color-cyan-brighter: #d5ffff;
   --color-secondary: #ecfeff;
   --color-accent: #22d3ee;
   --color-dark: #164e63;
   --color-text-main: #083344;
   --color-text-light: #ecfeff;
   --color-text-slate: #334155;
+}
+
+@layer components {
+  .home-container {
+    @apply mx-auto w-[80%] max-w-7xl;
+  }
+
+  .card-project {
+    /* Cores e Fundo */
+    @apply bg-cyan-brighter text-dark;
+
+    /* Forma e Espaçamento */
+    @apply rounded-xl p-10;
+
+    /* Comportamento do Texto */
+    @apply text-justify;
+
+    /* Estilização automática dos elementos internos (Opcional mas poderoso) */
+    h2 {
+      @apply text-3xl font-bold;
+    }
+
+    h3 {
+      @apply mt-5 mb-2 text-xl font-bold;
+    }
+
+    ul {
+      @apply list-disc ml-6 space-y-2 mt-4;
+    }
+  }
 }

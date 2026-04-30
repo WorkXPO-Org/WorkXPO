@@ -2,7 +2,7 @@ export default function Hero() {
   const innovationImage = "idea.svg";
 
   return (
-    <section className="flex flex-row items-center justify-between mx-auto max-w-6xl min-h-[70vh] gap-10">
+    <section className="flex flex-row items-center justify-between mx-auto max-w-6xl min-h-[70vh] gap-10 text-justify">
       <div className="flex-1">
         <h1 className="text-5xl font-extrabold text-dark mb-6">
           Sua Inovação começa aqui!
@@ -15,7 +15,7 @@ export default function Hero() {
         </p>
 
         <button className="bg-primary text-xl text-text-light px-8 py-3 rounded-xl font-bold hover:bg-dark transition-all">
-          <a href="/subbmit-project">Envie seu Projeto</a>
+          <a href="/submit-project">Envie seu Projeto</a>
         </button>
       </div>
 
