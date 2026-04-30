@@ -6,7 +6,7 @@ export default function ProjectCard({ title, category, image, description }) {
         <span>{category}</span>
       </div>
 
-      <div>
+      <div className="px-5 pb-5">
         <h3>{title}</h3>
         <p>{description}</p>
       </div>

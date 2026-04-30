@@ -3,9 +3,9 @@ import './style.css'
 
 function App() {
   return (
-    <>
-      <HomeComponent />
-    </>
+    <main>
+      <HomeComponent className="scroll-smooth"/>
+    </main>
   );
 }
 
