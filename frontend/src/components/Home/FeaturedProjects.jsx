@@ -1,17 +1,24 @@
 import ProjectCard from "../ProjectCard";
+import { PROJECTS } from "../../data/projects-data";
 
 export default function FeaturedProjects() {
+  
+  // takes only the first 4 projects in the projects-data
+  const featured = PROJECTS.slice(0, 4);
+  
   return (
-    <section className="card-project">
+    <section className="card-project ">
       <h2 className="mb-5">Projetos Destacados</h2>
-      <ProjectCard
-        title={"Utilizando IA para Cálculos Matemáticos"}
-        category={"Computação"}
-        description={
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptates ipsam minima vitae dicta cum iusto earum et deleniti hic voluptate beatae voluptatibus saepe, repudiandae sapiente dolor. Minima, nisi saepe!"
-        }
-        image={"https://placehold.co/600x300"}
-      ></ProjectCard>
+      <div className="grid grid-cols-2 gap-4">
+        {featured.map((project) => (
+          <ProjectCard
+            key={project.id}
+            title={project.title}
+            category={project.category}
+            image={project.image}
+          />
+        ))}
+      </div>
     </section>
   );
 }

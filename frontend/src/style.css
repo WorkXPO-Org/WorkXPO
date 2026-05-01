@@ -21,7 +21,7 @@
   }
 
   .card-project {
-    @apply bg-cyan-brighter text-dark;
+    @apply bg-cyan-brighter text-dark h-full;
 
     @apply rounded-xl p-10;
 
