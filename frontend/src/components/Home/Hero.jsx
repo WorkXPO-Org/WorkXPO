@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Hero() {
   const innovationImage = "idea.svg";
 
@@ -15,7 +17,7 @@ export default function Hero() {
         </p>
 
         <button className="bg-primary text-xl text-text-light px-8 py-3 rounded-xl font-bold hover:bg-dark transition-all">
-          <a href="/submit-project">Envie seu Projeto</a>
+          <Link to="/submit-project">Envie seu Projeto</Link>
         </button>
       </div>
 

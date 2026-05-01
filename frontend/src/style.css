@@ -9,6 +9,7 @@
   --color-secondary: #ecfeff;
   --color-accent: #22d3ee;
   --color-dark: #164e63;
+
   --color-text-main: #083344;
   --color-text-light: #ecfeff;
   --color-text-slate: #334155;
@@ -43,5 +44,9 @@
     @apply bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm;
 
     @apply flex flex-col h-full transition-shadow hover:shadow-md;
+  }
+
+  .header {
+    @apply bg-primary p-5 border-dark/20 flex flex-row items-center justify-between;
   }
 }
