@@ -4,13 +4,15 @@ export default function Header() {
   const MENU_ITEMS = [
     { label: "Home", path: "/" },
     { label: "Vitrine de Projetos", path: "/projects" },
-    { label: "Sobre", path: "/abbout" },
+    { label: "Sobre", path: "/about" },
   ];
 
   return (
     <header className="header">
       <div className="flex-1">
-        <h1 className="text-3xl font-bold text-text-main">WorkXPO</h1>
+        <h1 className="text-3xl font-bold text-text-main">
+          <Link to="/">WorkXPO</Link>
+        </h1>
       </div>
 
       <nav className="flex-none">
