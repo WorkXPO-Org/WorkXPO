@@ -1,3 +1,28 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
 spring:
+  datasource:
+    url: jdbc:postgresql://db.hqkliimgwllzcbdsqhcq.supabase.co:5432/postgres
+    username: postgres
+    password: YHNQNqkjaaDmuhT8
+    driver-class-name: org.postgresql.Driver
+
   application:
     name: backend
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://hqkliimgwllzcbdsqhcq.supabase.co/auth/v1
