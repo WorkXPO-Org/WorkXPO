@@ -4,22 +4,24 @@ server:
     context-path: /api
 
 spring:
+  application:
+    name: backend
+
   datasource:
-    url: jdbc:postgresql://db.hqkliimgwllzcbdsqhcq.supabase.co:5432/postgres
+    url: jdbc:postgresql://aws-1-us-east-1.pooler.supabase.com:5432/postgres?user=postgres.hqkliimgwllzcbdsqhcq&password=YHNQNqkjaaDmuhT8
     username: postgres
     password: YHNQNqkjaaDmuhT8
     driver-class-name: org.postgresql.Driver
 
-  application:
-    name: backend
-
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
     properties:
-      hibernate.format_sql: true
+      hibernate:
+        format_sql: true
+        boot:
+          allow_jdbc_metadata_acess: false
 
   security:
     oauth2:

@@ -26,8 +26,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/api/projects/**")
                             .permitAll()
-                            .anyRequest()
-                            .authenticated())
+                            .anyRequest().authenticated()
+                )
                 .oauth2ResourceServer(
                         oauth2 ->
                                 oauth2.jwt(Customizer.withDefaults()));
