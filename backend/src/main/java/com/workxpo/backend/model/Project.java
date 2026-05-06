@@ -1,6 +1,10 @@
 package com.workxpo.backend.model;
 
+import com.workxpo.backend.model.enums.HelpStatus;
+import com.workxpo.backend.model.enums.ProjectStatus;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,6 +45,18 @@ public class Project {
 
     @Column(name = "project_image_url")
     private String imageUrl;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "project_status_project", nullable = false)
+    private ProjectStatus statusProject;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "project_status_help", nullable = false)
+    private HelpStatus statusHelp;
+
+    @NotBlank(message = "Contact link must not be blank")
+    @Column(name = "project_contact_link", nullable = false)
+    private String contactLink;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
