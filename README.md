@@ -19,7 +19,7 @@
   - **Autenticação e Autorização:** Sistema de login seguro, garantindo que os usuários gerenciem apenas seus próprios projetos e dados.
   - **Vitrine Responsiva:** Uma interface moderna e centralizada para explorar projetos por categoria.
 
-  ## 🛠Tecnologias
+  ## Tecnologias
 
   ### Frontend
   - **React.js**: Para a criação de uma interface dinâmica.
@@ -29,10 +29,10 @@
   - *Decisão em andamento* (Atualmente explorando as melhores opções de escalabilidade para a API e o Banco de Dados).
 
   ## Desenvolvedores
-    - **Bruno da Silva**
-    - **Lázaro Kauã**
-    - **Rafael Oliveira**
-    - **Valmir Orçai**
+  - **Bruno da Silva**
+  - **Lázaro Kauã**
+  - **Rafael Oliveira**
+  - **Valmir Orçai**
 
 </details>
 
