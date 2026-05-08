@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,14 +26,13 @@ public class UserServiceImpl implements UserService {
         return userRepository
                 .findAll()
                 .stream()
-                .map(userDTOMapper)
-                .collect(Collectors.toList());
+                .map(userDTOMapper::toResponseDTO).toList();
     }
 
     @Override
     public UserResponseDTO findUserById(UUID id) {
         return userRepository.findById(id)
-                .map(userDTOMapper)
+                .map(userDTOMapper::toResponseDTO)
                 .orElseThrow(() -> new RuntimeException("User id not found"));
     }
 
@@ -50,8 +48,7 @@ public class UserServiceImpl implements UserService {
         newUser.setId(supabaseId);
 
         User savedUser = userRepository.save(newUser);
-
-        return userDTOMapper.apply(savedUser);
+        return userDTOMapper.toResponseDTO(savedUser);
     }
 
 
@@ -81,7 +78,7 @@ public class UserServiceImpl implements UserService {
         Optional.ofNullable(updateRequest.description()).ifPresent(user::setDescription);
         Optional.ofNullable(updateRequest.linkedinUrl()).ifPresent(user::setLinkedinUrl);
 
-        return userDTOMapper.apply(user);
+        return userDTOMapper.toResponseDTO(user);
     }
 
 }

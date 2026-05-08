@@ -3,15 +3,12 @@ package com.workxpo.backend.dto.user;
 import com.workxpo.backend.dto.user.request.UserCreateDTO;
 import com.workxpo.backend.dto.user.response.UserResponseDTO;
 import com.workxpo.backend.model.User;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-import java.util.function.Function;
+@Component
+public class UserDTOMapper {
 
-@Service
-public class UserDTOMapper implements Function<User, UserResponseDTO> {
-
-    @Override
-    public UserResponseDTO apply(User user) {
+    public UserResponseDTO toResponseDTO(User user) {
         return new UserResponseDTO(
                 user.getId(),
                 user.getEmail(),

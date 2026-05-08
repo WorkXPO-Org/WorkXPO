@@ -1,5 +1,6 @@
 package com.workxpo.backend.dto.project.response;
 
+import com.workxpo.backend.dto.user.response.UserResponseDTO;
 import com.workxpo.backend.model.User;
 
 import java.util.List;
@@ -11,8 +12,8 @@ public record ProjectResponseDTO(
         String category,
         String institution,
         String advisor,
-        List<User> studentsGroup,
-        User studentLeader,
+        List<UserResponseDTO> studentsGroup,
+        UserResponseDTO studentLeader,
         String readmeUrl,
         String imageUrl
 ) { }
