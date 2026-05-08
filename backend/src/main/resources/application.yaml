@@ -28,3 +28,8 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: https://hqkliimgwllzcbdsqhcq.supabase.co/auth/v1
+
+logging:
+  level:
+    org.springframework.security: debug
+    web: debug

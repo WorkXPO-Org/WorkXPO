@@ -39,19 +39,25 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserResponseDTO createUser(UserRequestDTO userRequest, UUID supabaseId) {
-        User user = userRepository
-                .findById(supabaseId)
-                .orElseGet(() -> {
-                    User newUser = userDTOMapper.toEntity(userRequest);
-                    newUser.setId(supabaseId);
-                    return newUser;
-        });
 
-        user.setEmail(userRequest.getEmail());
-        user.setFullName(userRequest.getFullName());
+        if (userRepository.existsById(supabaseId)) {
+            throw new RuntimeException("User already registered");
+        }
 
-        User savedUser = userRepository.save(user);
-        
-        return findUserById(savedUser.getId());
+        User newUser = userDTOMapper.toEntity(userRequest);
+        newUser.setId(supabaseId);
+
+        User savedUser = userRepository.save(newUser);
+
+        return userDTOMapper.apply(savedUser);
+    }
+
+    @Transactional
+    @Override
+    public void deleteUserById(UUID supabaseId) {
+        User user = userRepository.findById(supabaseId)
+                .orElseThrow(() -> new RuntimeException("User does not exist"));
+
+        userRepository.delete(user);
     }
 }
