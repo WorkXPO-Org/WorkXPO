@@ -1,8 +1,8 @@
 package com.workxpo.backend.service;
 
-import com.workxpo.backend.dto.user.UserRequestDTO;
-import com.workxpo.backend.dto.user.UserResponseDTO;
-import jakarta.transaction.Transactional;
+import com.workxpo.backend.dto.user.request.UserCreateDTO;
+import com.workxpo.backend.dto.user.response.UserResponseDTO;
+import com.workxpo.backend.dto.user.request.UserUpdateDTO;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,8 +14,9 @@ public interface UserService {
 
     UserResponseDTO findUserById(UUID id);
 
-    UserResponseDTO createUser(UserRequestDTO userRequest, UUID supabaseId);
+    UserResponseDTO createUser(UserCreateDTO userRequest, UUID supabaseId);
 
-    @Transactional
     void deleteUserById(UUID supabaseId);
+
+    UserResponseDTO updateUser(UUID supabaseId, UserUpdateDTO requestDTO);
 }

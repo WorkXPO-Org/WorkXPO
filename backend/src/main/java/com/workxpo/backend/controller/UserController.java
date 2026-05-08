@@ -1,8 +1,9 @@
 package com.workxpo.backend.controller;
 
 
-import com.workxpo.backend.dto.user.UserRequestDTO;
-import com.workxpo.backend.dto.user.UserResponseDTO;
+import com.workxpo.backend.dto.user.request.UserCreateDTO;
+import com.workxpo.backend.dto.user.response.UserResponseDTO;
+import com.workxpo.backend.dto.user.request.UserUpdateDTO;
 import com.workxpo.backend.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +34,9 @@ public class UserController {
     }
 
     @PostMapping("/create/{supabaseId}")
-    public ResponseEntity<UserResponseDTO> createUser(@PathVariable UUID supabaseId,
-                           @Valid @RequestBody UserRequestDTO requestDTO) {
+    public ResponseEntity<UserResponseDTO> createUser(
+            @PathVariable UUID supabaseId,
+            @Valid @RequestBody UserCreateDTO requestDTO) {
 
         UserResponseDTO newUser = userService.createUser(requestDTO, supabaseId);
 
@@ -48,4 +50,12 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<UserResponseDTO> updateUser(
+            @PathVariable UUID id,
+            @Valid @RequestBody UserUpdateDTO requestDTO) {
+
+        UserResponseDTO userResponse = userService.updateUser(id, requestDTO);
+        return ResponseEntity.ok(userResponse);
+    }
 }

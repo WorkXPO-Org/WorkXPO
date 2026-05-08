@@ -1,4 +1,4 @@
-package com.workxpo.backend.dto.user;
+package com.workxpo.backend.dto.user.response;
 
 import java.util.UUID;
 

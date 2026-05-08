@@ -27,7 +27,7 @@ public class User {
     private String email;
 
     @Column(name = "user_name", nullable = false)
-    private String fullName;
+    private String username;
 
     @Column(name = "user_institution")
     private String institution;
