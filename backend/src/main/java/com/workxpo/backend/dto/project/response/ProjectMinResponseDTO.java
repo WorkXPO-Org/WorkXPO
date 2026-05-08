@@ -1,4 +1,4 @@
-package com.workxpo.backend.dto.project;
+package com.workxpo.backend.dto.project.response;
 
 public record ProjectMinResponseDTO(
         String title,

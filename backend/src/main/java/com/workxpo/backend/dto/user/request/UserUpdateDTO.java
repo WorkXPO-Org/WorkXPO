@@ -8,7 +8,9 @@ public record UserUpdateDTO(
 
         @Email
         String email,
-        @Size(min = 3, max = 30) String username,
+
+        @Size(min = 3, max = 30)
+        String username,
 
         @Size(max = 100)
         String institution,
