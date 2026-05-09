@@ -36,6 +36,11 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("User id not found"));
     }
 
+    public User findEntityById(UUID id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User id not found"));
+    }
+
     @Override
     @Transactional
     public UserResponseDTO createUser(UserCreateDTO userRequest, UUID supabaseId) {

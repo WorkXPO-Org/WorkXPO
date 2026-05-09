@@ -43,13 +43,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
-        userService.deleteUserById(id);
-
-        return ResponseEntity.noContent().build();
-    }
-
     @PatchMapping("/{id}")
     public ResponseEntity<UserResponseDTO> updateUser(
             @PathVariable UUID id,
@@ -57,5 +50,12 @@ public class UserController {
 
         UserResponseDTO userResponse = userService.updateUser(id, requestDTO);
         return ResponseEntity.ok(userResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
+        userService.deleteUserById(id);
+
+        return ResponseEntity.noContent().build();
     }
 }

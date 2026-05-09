@@ -26,6 +26,7 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectRepository projectRepository;
     private final ProjectDTOMapper projectDTOMapper;
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @Override
     public List<ProjectMinResponseDTO> findAllProjectsForShowcase() {
@@ -54,9 +55,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     @Transactional
-    public ProjectResponseDTO createProject(ProjectCreateDTO projectRequest, User studentLeader) {
+    public ProjectResponseDTO createProject(ProjectCreateDTO projectRequest, UUID studentId) {
 
-        // TODO: Verify if the method is working or changes in the ProjectCreateDTO are need.
+        // TODO: Verify if the method is working or changes in the ProjectCreateDTO are needed.
+        User studentLeader = userService.findEntityById(studentId);
+
         Project project = projectDTOMapper.toEntity(projectRequest);
         project.setStudentLeader(studentLeader);
 
@@ -107,7 +110,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     @Transactional
-    public void deleteProjectById(Long id, UUID userId)  {
+    public void deleteProjectById(Long id, UUID userId) {
 
         Project project = projectRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Project does not exist"));

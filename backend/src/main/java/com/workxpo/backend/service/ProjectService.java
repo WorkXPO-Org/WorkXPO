@@ -19,7 +19,7 @@ public interface ProjectService {
 
     List<ProjectMinResponseDTO> filterProjectByCategory(Category category);
 
-    ProjectResponseDTO createProject(ProjectCreateDTO projectRequest, User studentLeader);
+    ProjectResponseDTO createProject(ProjectCreateDTO projectRequest, UUID studentId);
 
     ProjectResponseDTO updateProject(Long id, ProjectUpdateDTO dto, UUID userId);
 
