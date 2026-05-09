@@ -21,7 +21,7 @@ public interface ProjectService {
 
     ProjectResponseDTO createProject(ProjectCreateDTO projectRequest, User studentLeader);
 
-    ProjectResponseDTO updateProject(Long id, Map<String, Object> updatedRequest, UUID userId);
+    ProjectResponseDTO updateProject(Long id, ProjectUpdateDTO dto, UUID userId);
 
     void deleteProjectById(Long id, UUID userId);
 }

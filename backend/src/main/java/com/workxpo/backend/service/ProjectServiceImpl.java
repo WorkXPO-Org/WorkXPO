@@ -2,21 +2,20 @@ package com.workxpo.backend.service;
 
 import com.workxpo.backend.dto.project.ProjectDTOMapper;
 import com.workxpo.backend.dto.project.request.ProjectCreateDTO;
+import com.workxpo.backend.dto.project.request.ProjectUpdateDTO;
 import com.workxpo.backend.dto.project.response.ProjectMinResponseDTO;
 import com.workxpo.backend.dto.project.response.ProjectResponseDTO;
 import com.workxpo.backend.model.Project;
 import com.workxpo.backend.model.User;
 import com.workxpo.backend.model.enums.Category;
-import com.workxpo.backend.model.enums.HelpStatus;
-import com.workxpo.backend.model.enums.ProjectStatus;
 import com.workxpo.backend.repository.ProjectRepository;
+import com.workxpo.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -26,9 +25,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
     private final ProjectDTOMapper projectDTOMapper;
+    private final UserRepository userRepository;
 
     @Override
     public List<ProjectMinResponseDTO> findAllProjectsForShowcase() {
+
         return projectRepository.findAll()
                 .stream()
                 .map(projectDTOMapper::toMinResponseDTO).toList();
@@ -40,7 +41,6 @@ public class ProjectServiceImpl implements ProjectService {
         return projectRepository.findById(id)
                 .map(projectDTOMapper::toResponseDTO)
                 .orElseThrow(() -> new RuntimeException("Project id not found"));
-
     }
 
     @Override
@@ -56,6 +56,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional
     public ProjectResponseDTO createProject(ProjectCreateDTO projectRequest, User studentLeader) {
 
+        // TODO: Verify if the method is working or changes in the ProjectCreateDTO are need.
         Project project = projectDTOMapper.toEntity(projectRequest);
         project.setStudentLeader(studentLeader);
 
@@ -65,7 +66,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     @Transactional
-    public ProjectResponseDTO updateProject(Long id, Map<String, Object> updatedRequest, UUID userId) {
+    public ProjectResponseDTO updateProject(Long id, ProjectUpdateDTO dto, UUID userId) {
 
         Project project = projectRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Project does not exist"));
@@ -74,26 +75,32 @@ public class ProjectServiceImpl implements ProjectService {
             throw new AccessDeniedException("You do not have permission to edit this project");
         }
 
-        Optional.ofNullable((String) updatedRequest.get("title")).ifPresent(project::setTitle);
-        Optional.ofNullable((String) updatedRequest.get("description")).ifPresent(project::setDescription);
-        Optional.ofNullable((String) updatedRequest.get("readmeUrl")).ifPresent(project::setReadmeUrl);
-        Optional.ofNullable((String) updatedRequest.get("imageUrl")).ifPresent(project::setImageUrl);
-        Optional.ofNullable((String) updatedRequest.get("contactLink")).ifPresent(project::setContactLink);
+        // return the field for a update if they're present. If not, it doesn't update
+        Optional.ofNullable(dto.title()).ifPresent(project::setTitle);
+        Optional.ofNullable(dto.description()).ifPresent(project::setDescription);
+        Optional.ofNullable(dto.institution()).ifPresent(project::setInstitution);
+        Optional.ofNullable(dto.advisor()).ifPresent(project::setAdvisor);
 
-        Optional.ofNullable((String) updatedRequest.get("statusProject"))
-                .ifPresent(
-                        status -> project.setStatusProject(ProjectStatus.valueOf(status))
-                );
+        Optional.ofNullable(dto.readmeUrl()).ifPresent(project::setReadmeUrl);
+        Optional.ofNullable(dto.imageUrl()).ifPresent(project::setImageUrl);
 
-        Optional.ofNullable((String) updatedRequest.get("statusHelp"))
-                .ifPresent(
-                        status -> project.setStatusHelp(HelpStatus.valueOf(status))
-                );
 
-        Optional.ofNullable((String) updatedRequest.get("statusProject"))
-                .ifPresent(
-                        category -> project.setCategory(Category.valueOf(category))
-                );
+        Optional.ofNullable(dto.statusProject()).ifPresent(project::setStatusProject);
+        Optional.ofNullable(dto.statusHelp()).ifPresent(project::setStatusHelp);
+        Optional.ofNullable(dto.category()).ifPresent(project::setCategory);
+        Optional.ofNullable(dto.contactLink()).ifPresent(project::setContactLink);
+
+        Optional.ofNullable(dto.studentsGroup()).ifPresent(ids -> {
+
+            List<User> users = userRepository.findAllById(ids);
+
+            // verify if the ids does exist
+            if (users.size() != ids.size()) {
+                throw new RuntimeException("One or more ids in the group were not found");
+            }
+
+            project.setStudentsGroup(users);
+        });
 
         return projectDTOMapper.toResponseDTO(projectRepository.save(project));
     }

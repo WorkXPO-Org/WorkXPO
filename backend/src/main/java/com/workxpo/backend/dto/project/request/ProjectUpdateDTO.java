@@ -1,12 +1,13 @@
 package com.workxpo.backend.dto.project.request;
 
-import com.workxpo.backend.model.User;
+import com.workxpo.backend.model.enums.Category;
 import com.workxpo.backend.model.enums.HelpStatus;
 import com.workxpo.backend.model.enums.ProjectStatus;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.URL;
 
 import java.util.List;
+import java.util.UUID;
 
 public record ProjectUpdateDTO(
 
@@ -15,7 +16,6 @@ public record ProjectUpdateDTO(
 
         @Size(max = 350)
         String description,
-        String category,
 
         @Size(max = 100)
         String institution,
@@ -23,15 +23,17 @@ public record ProjectUpdateDTO(
         @Size(max = 80)
         String advisor,
 
-        List<User> studentsGroup,
+        List<UUID> studentsGroup,
 
         @URL
         String readmeUrl,
 
         @URL
         String imageUrl,
+
         ProjectStatus statusProject,
         HelpStatus statusHelp,
+        Category category,
 
         @Size(max = 100)
         String contactLink

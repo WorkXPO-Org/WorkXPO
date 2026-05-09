@@ -47,7 +47,6 @@ public class Project {
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    @Column(name = "project_students_group")
     private List<User> studentsGroup;
 
     @Column(name = "project_readme_url")
