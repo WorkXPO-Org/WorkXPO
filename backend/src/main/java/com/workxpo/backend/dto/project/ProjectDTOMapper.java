@@ -8,6 +8,8 @@ import com.workxpo.backend.model.Project;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 
 @Component
 @RequiredArgsConstructor
@@ -31,7 +33,8 @@ public class ProjectDTOMapper {
                 project.getCategory().name(),
                 project.getInstitution(),
                 project.getAdvisor(),
-                project.getStudentsGroup().stream()
+                project.getStudentsGroup() == null ? List.of() :
+                        project.getStudentsGroup().stream()
                         .map(userMapper::toResponseDTO)
                         .toList(),
                 userMapper.toResponseDTO(project.getStudentLeader()),
