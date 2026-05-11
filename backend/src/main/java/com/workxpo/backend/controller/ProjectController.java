@@ -38,7 +38,7 @@ public class ProjectController {
         return ResponseEntity.ok(projectService.findProjectById(id));
     }
 
-    @GetMapping("/{category}")
+    @GetMapping("/category/{category}")
     public ResponseEntity<List<ProjectMinResponseDTO>> getProjectsByCategory(@PathVariable Category category) {
 
         return ResponseEntity.ok(projectService.filterProjectByCategory(category));

@@ -19,6 +19,7 @@ public class ProjectDTOMapper {
 
     public ProjectMinResponseDTO toMinResponseDTO(Project project) {
         return new ProjectMinResponseDTO(
+                project.getId(),
                 project.getTitle(),
                 project.getCategory().name(),
                 project.getImageUrl()
