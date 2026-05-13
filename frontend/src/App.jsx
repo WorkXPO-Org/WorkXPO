@@ -5,6 +5,7 @@ import Showcase from "./components/Showcase/Showcase";
 import About from "./components/About/About";
 import SignIn from "./components/Auth/SignIn";
 import SignUp from "./components/Auth/SignUp";
+import MetricsDashboard from "./components/Metrics/MetricsDashboard";
 
 function App() {
   return (
@@ -12,13 +13,16 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeComponent />} />
         
-        <Route path="/signin" element={<SignIn/>}/>
+        <Route path="/signin" element={<SignIn/>} />
 
-        <Route path="/signup" element={<SignUp/>}/>
+        <Route path="/signup" element={<SignUp/>} />
         
-        <Route path="/projects" element={<Showcase />}></Route>
+        <Route path="/projects" element={<Showcase />} />
 
-        <Route path="/about" element={<About />} ></Route>
+        <Route path="/about" element={<About />} />
+
+        <Route path="/metrics" element={<MetricsDashboard />} />
+
       </Routes>
     </main>
   );
