@@ -29,7 +29,8 @@
   - **TailwindCSS**: Para estilização moderna, baseada em utilitários e design responsivo.
 
   ### Backend
-  - *Decisão em andamento* (Atualmente explorando as melhores opções de escalabilidade para a API e o Banco de Dados).
+  - **Spring**: Para um desenvolvimento melhor e mais fácil do backend.
+  - **Supabase**: Para autenticação e autorização.
 
   ## Desenvolvedores
   - **Bruno da Silva**
@@ -64,7 +65,8 @@ The platform is being built to provide experiences for both students and compani
 - **TailwindCSS**: For modern, utility-first styling and responsive design.
 
 ### Backend
-- *Decision in progress* (Currently exploring the best scalability options for the API and Database).
+- **Spring**: For a better and easier backend development.
+- **Supabase**: For authentication and authorization.
 
 ## Developers
 
