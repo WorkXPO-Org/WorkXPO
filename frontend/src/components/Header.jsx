@@ -32,14 +32,14 @@ export default function Header() {
 
       <div className="flex-1 flex justify-end items-center gap-4">
         <Link
-          to="/login"
+          to="/signin"
           className="text-text-main font-semibold hover:underline"
         >
           Entrar
         </Link>
 
         <Link
-          to="/register"
+          to="/signup"
           className="bg-dark text-white px-5 py-2 rounded-full font-bold hover:bg-dark/90 transition-all shadow-sm"
         >
           Criar Conta
