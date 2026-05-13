@@ -1,15 +1,11 @@
 package com.workxpo.backend.dto.project.request;
 
-import com.workxpo.backend.model.User;
 import com.workxpo.backend.model.enums.Category;
 import com.workxpo.backend.model.enums.HelpStatus;
 import com.workxpo.backend.model.enums.ProjectStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.hibernate.validator.constraints.URL;
-
-import java.util.List;
 
 public record ProjectCreateDTO(
 

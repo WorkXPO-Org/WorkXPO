@@ -22,6 +22,8 @@ public class ProjectDTOMapper {
                 project.getId(),
                 project.getTitle(),
                 project.getCategory().name(),
+                project.getStatusProject(),
+                project.getStatusHelp(),
                 project.getImageUrl()
         );
     }
@@ -32,6 +34,8 @@ public class ProjectDTOMapper {
                 project.getTitle(),
                 project.getDescription(),
                 project.getCategory().name(),
+                project.getStatusProject(),
+                project.getStatusHelp(),
                 project.getInstitution(),
                 project.getAdvisor(),
                 project.getStudentsGroup() == null ? List.of() :
