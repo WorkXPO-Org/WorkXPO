@@ -19,6 +19,8 @@ public interface ProjectService {
 
     List<ProjectMinResponseDTO> filterProjectByCategory(Category category);
 
+    Map<Category, Double> calculateICPByEachCategory();
+
     ProjectResponseDTO createProject(ProjectCreateDTO projectRequest, UUID studentId);
 
     ProjectResponseDTO updateProject(Long id, ProjectUpdateDTO dto, UUID userId);

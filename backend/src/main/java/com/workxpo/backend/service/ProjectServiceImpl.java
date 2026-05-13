@@ -8,6 +8,7 @@ import com.workxpo.backend.dto.project.response.ProjectResponseDTO;
 import com.workxpo.backend.model.Project;
 import com.workxpo.backend.model.User;
 import com.workxpo.backend.model.enums.Category;
+import com.workxpo.backend.model.enums.HelpStatus;
 import com.workxpo.backend.repository.ProjectRepository;
 import com.workxpo.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -16,8 +17,10 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -54,6 +57,30 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public Map<Category, Double> calculateICPByEachCategory() {
+
+        List<Project> projects = projectRepository.findAll();
+
+        return projects.stream()
+                .collect(Collectors.groupingBy(
+                        Project::getCategory,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> {
+                                    if (list.isEmpty()) return 0.0;
+
+                                    // filter the projects that already received help
+                                    long contactedProjects = list.stream()
+                                            .filter(proj -> proj.getStatusHelp() == HelpStatus.RECEIVED)
+                                            .count();
+
+                                    return (double) contactedProjects / list.size() * 100;
+                                }
+                        )
+                ));
+    }
+
+    @Override
     @Transactional
     public ProjectResponseDTO createProject(ProjectCreateDTO projectRequest, UUID studentId) {
 
@@ -78,7 +105,7 @@ public class ProjectServiceImpl implements ProjectService {
             throw new AccessDeniedException("You do not have permission to edit this project");
         }
 
-        // return the field for a update if they're present. If not, it doesn't update
+        // return the field for an update if they're present. If not, it doesn't update
         Optional.ofNullable(dto.title()).ifPresent(project::setTitle);
         Optional.ofNullable(dto.description()).ifPresent(project::setDescription);
         Optional.ofNullable(dto.institution()).ifPresent(project::setInstitution);

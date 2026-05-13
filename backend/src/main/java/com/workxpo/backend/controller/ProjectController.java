@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -43,6 +44,12 @@ public class ProjectController {
 
         return ResponseEntity.ok(projectService.filterProjectByCategory(category));
     }
+
+    @GetMapping("/metrics/icp")
+    public ResponseEntity<Map<Category, Double>> getICPByEachCategory() {
+        return ResponseEntity.ok(projectService.calculateICPByEachCategory());
+    }
+
 
     @PostMapping("/create")
     public ResponseEntity<ProjectResponseDTO> createProject(
