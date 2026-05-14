@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <header className="header shadow-md">
       <div className="flex-1">
-        <h1 className="text-3xl font-serif font-bold text-text-main">
+        <h1 className="text-3xl font-bold text-text-main">
           <Link to="/">WorkXPO</Link>
         </h1>
       </div>

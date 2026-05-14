@@ -6,6 +6,7 @@ import About from "./components/About/About";
 import SignIn from "./components/Auth/SignIn";
 import SignUp from "./components/Auth/SignUp";
 import MetricsDashboard from "./components/Metrics/MetricsDashboard";
+import ProjectDetails from "./components/ProjectDetails/ProjectDetails";
 
 function App() {
   return (
@@ -19,10 +20,11 @@ function App() {
         
         <Route path="/projects" element={<Showcase />} />
 
+        <Route path="/projects/:id" element={<ProjectDetails />} />
+
         <Route path="/about" element={<About />} />
 
         <Route path="/metrics" element={<MetricsDashboard />} />
-
       </Routes>
     </main>
   );
