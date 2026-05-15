@@ -62,14 +62,14 @@ export default function SignIn() {
         onSubmit={handleLogin}
         className="p-8 bg-white shadow-md rounded-lg w-96"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">
+        <h2 className="text-2xl font-bold mb-6 text-center text-dark">
           WorkXPO Login
         </h2>
 
         <input
           type="email"
           placeholder="Seu e-mail"
-          className="w-full p-2 mb-4 border rounded"
+          className="form-fields"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -77,7 +77,7 @@ export default function SignIn() {
         <input
           type="password"
           placeholder="Sua senha"
-          className="w-full p-2 mb-6 border rounded"
+          className="form-fields"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -86,7 +86,7 @@ export default function SignIn() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 disabled:opacity-50"
+          className="w-full bg-dark text-white p-2 rounded hover:bg-light-dark disabled:opacity-50"
         >
           {loading ? "Entrando..." : "Entrar"}
         </button>

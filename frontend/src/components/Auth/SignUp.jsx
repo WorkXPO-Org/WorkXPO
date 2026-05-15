@@ -50,14 +50,14 @@ export default function SignUp() {
         onSubmit={handleSignUp}
         className="p-8 bg-white shadow-md rounded-lg w-96"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center text-blue-600 font-serif">
+        <h2 className="text-2xl font-bold mb-6 text-center text-dark">
           Criar Conta WorkXPO
         </h2>
 
         <input
           name="username"
           placeholder="Nome Completo"
-          className="w-full p-2 mb-4 border rounded"
+          className="form-fields"
           onChange={handleChange}
           required
         />
@@ -65,7 +65,7 @@ export default function SignUp() {
           name="email"
           type="email"
           placeholder="E-mail"
-          className="w-full p-2 mb-4 border rounded"
+          className="form-fields"
           onChange={handleChange}
           required
         />
@@ -73,7 +73,7 @@ export default function SignUp() {
           name="password"
           type="password"
           placeholder="Senha (min. 6 caracteres)"
-          className="w-full p-2 mb-4 border rounded"
+          className="form-fields"
           onChange={handleChange}
           required
         />
@@ -81,14 +81,14 @@ export default function SignUp() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 disabled:opacity-50 transition-colors"
+          className="w-full bg-dark font-semibold text-white p-2 rounded hover:bg-light-dark disabled:opacity-50 transition-colors duration-500"
         >
           {loading ? "Cadastrando..." : "Cadastrar"}
         </button>
 
-        <p className="mt-4 text-center text-sm text-gray-600 font-sans">
+        <p className="mt-4 text-center text-sm text-gray-600">
           Já tem uma conta?{" "}
-          <Link to="/" className="text-blue-500 hover:underline">
+          <Link to="/signin" className="text-blue-500 hover:underline">
             Entrar
           </Link>
         </p>
