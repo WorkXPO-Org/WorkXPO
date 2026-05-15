@@ -17,8 +17,8 @@ export default function ProjectDetails() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  if (loading) return <div className="text-center p-10 font-sans text-text-main">Carregando detalhes da inovação...</div>;
-  if (!project) return <div className="text-center p-10 font-sans text-text-main">Projeto não encontrado.</div>;
+  if (loading) return <div className="text-center p-10 text-text-main">Carregando detalhes da inovação...</div>;
+  if (!project) return <div className="text-center p-10 text-text-main">Projeto não encontrado.</div>;
 
   // placeholder url
   const categoryText = encodeURIComponent(project.category || "Projeto");
@@ -87,7 +87,7 @@ export default function ProjectDetails() {
 
             <div>
               <p className="text-xs text-primary font-bold uppercase tracking-tighter">Líder do Grupo</p>
-              <p className="text-lg font-bold">{project.studentLeader?.fullname}</p>
+              <p className="text-lg font-bold">{project.studentLeader?.username}</p>
             </div>
 
             <div>

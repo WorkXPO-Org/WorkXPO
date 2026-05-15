@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/axios';
 import Header from '../Header';
+import MyProjects from './MyProjects';
 
 export default function ProfileDetails() {
   const [profile, setProfile] = useState(null);
@@ -23,7 +24,7 @@ export default function ProfileDetails() {
   if (loading) return <div className="p-10 text-text-main">Carregando perfil...</div>;
 
   return (
-    <div className="min-h-screen bg-secondary">
+    <div className="min-h-screen ">
       <Header />
       
       <main className="max-w-4xl mx-auto p-10">
@@ -86,6 +87,9 @@ export default function ProfileDetails() {
             )}
           </div>
         </div>
+
+        {/* this component shows the projects made by the user */}
+        <MyProjects />
       </main>
     </div>
   );
