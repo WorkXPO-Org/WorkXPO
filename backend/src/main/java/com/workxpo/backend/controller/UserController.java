@@ -35,6 +35,19 @@ public class UserController {
         return ResponseEntity.ok(userService.findUserById(id));
     }
 
+    // creates the user if it doesn't exist in the DB
+    @PostMapping("/sync")
+    public ResponseEntity<UserResponseDTO> syncUserProfile(
+            @AuthenticationPrincipal Jwt jwt,
+            @Valid @RequestBody UserCreateDTO requestDTO
+    ) {
+
+        UserResponseDTO synchronizedUser = userService.syncUserProfile(jwt, requestDTO);
+
+        return ResponseEntity.ok(synchronizedUser);
+    }
+
+    /*
     @PostMapping("/create")
     public ResponseEntity<UserResponseDTO> createUser(
             @AuthenticationPrincipal Jwt jwt,
@@ -46,6 +59,7 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
+     */
 
     @PatchMapping("/{id}")
     public ResponseEntity<UserResponseDTO> updateUser(

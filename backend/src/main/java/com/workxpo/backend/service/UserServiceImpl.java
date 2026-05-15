@@ -8,6 +8,7 @@ import com.workxpo.backend.model.User;
 import com.workxpo.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,6 +44,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public UserResponseDTO syncUserProfile(Jwt jwt, UserCreateDTO userRequest) {
+
+        UUID supabaseId = UUID.fromString(jwt.getSubject());
+
+        User user = userRepository.findById(supabaseId)
+                .orElseGet(() -> {
+                    User newUser = userDTOMapper.toEntity(userRequest);
+                    newUser.setId(supabaseId);
+                    return userRepository.save(newUser);
+                });
+
+        return userDTOMapper.toResponseDTO(user);
+    }
+
+    /*
+    @Override
+    @Transactional
     public UserResponseDTO createUser(UserCreateDTO userRequest, UUID supabaseId) {
 
         if (userRepository.existsById(supabaseId)) {
@@ -55,6 +73,7 @@ public class UserServiceImpl implements UserService {
         User savedUser = userRepository.save(newUser);
         return userDTOMapper.toResponseDTO(savedUser);
     }
+     */
 
 
     @Override
