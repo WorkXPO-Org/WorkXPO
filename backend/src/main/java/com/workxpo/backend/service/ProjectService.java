@@ -17,6 +17,8 @@ public interface ProjectService {
 
     ProjectResponseDTO findProjectById(Long id);
 
+    List<ProjectMinResponseDTO> findAllProjectsByAuthenticatedUser(UUID userId);
+
     List<ProjectMinResponseDTO> filterProjectByCategory(Category category);
 
     Map<Category, Double> calculateICPByEachCategory();

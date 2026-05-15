@@ -25,9 +25,11 @@ public class SecurityConfig {
                 .csrf(crsf -> crsf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/projects/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/projects/create").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/projects/my-projects").authenticated()
                         .requestMatchers(HttpMethod.POST, "/user/sync").authenticated()
                         .requestMatchers(HttpMethod.PATCH, "/user/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/user/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/user/details").authenticated()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(

@@ -14,6 +14,7 @@ import com.workxpo.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,6 +46,17 @@ public class ProjectServiceImpl implements ProjectService {
         return projectRepository.findById(id)
                 .map(projectDTOMapper::toResponseDTO)
                 .orElseThrow(() -> new RuntimeException("Project id not found"));
+    }
+
+    @Override
+    public List<ProjectMinResponseDTO> findAllProjectsByAuthenticatedUser(UUID supabaseId) {
+
+        User user = userRepository.findById(supabaseId).orElseThrow(() -> new RuntimeException("User not found"));
+
+        return projectRepository.findByStudentLeader(user)
+                .stream()
+                .map(projectDTOMapper::toMinResponseDTO)
+                .toList();
     }
 
     @Override

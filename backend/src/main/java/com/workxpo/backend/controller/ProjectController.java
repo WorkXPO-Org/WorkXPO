@@ -39,6 +39,17 @@ public class ProjectController {
         return ResponseEntity.ok(projectService.findProjectById(id));
     }
 
+    @GetMapping("/my-projects")
+    public ResponseEntity<List<ProjectMinResponseDTO>> getUserProjects(@AuthenticationPrincipal Jwt jwt) {
+
+        UUID supabaseId = UUID.fromString(jwt.getSubject());
+
+        List<ProjectMinResponseDTO> myProjects = projectService.findAllProjectsByAuthenticatedUser(supabaseId);
+
+        return ResponseEntity.ok(myProjects);
+    }
+
+
     @GetMapping("/category/{category}")
     public ResponseEntity<List<ProjectMinResponseDTO>> getProjectsByCategory(@PathVariable Category category) {
 
