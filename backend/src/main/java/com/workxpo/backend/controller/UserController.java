@@ -1,6 +1,7 @@
 package com.workxpo.backend.controller;
 
 
+import com.nimbusds.jwt.JWT;
 import com.workxpo.backend.dto.user.request.UserCreateDTO;
 import com.workxpo.backend.dto.user.response.UserResponseDTO;
 import com.workxpo.backend.dto.user.request.UserUpdateDTO;
@@ -29,10 +30,12 @@ public class UserController {
         return ResponseEntity.ok(userService.findAllUsers());
     }
 
-    @GetMapping("/{id}")
-    private ResponseEntity<UserResponseDTO> getUserById(@PathVariable UUID id) {
+    @GetMapping("/details")
+    private ResponseEntity<UserResponseDTO> getUserByToken(@AuthenticationPrincipal Jwt jwt) {
 
-        return ResponseEntity.ok(userService.findUserById(id));
+        UUID supabaseId = UUID.fromString(jwt.getSubject());
+
+        return ResponseEntity.ok(userService.findUserById(supabaseId));
     }
 
     // creates the user if it doesn't exist in the DB
@@ -61,12 +64,14 @@ public class UserController {
     }
      */
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/update")
     public ResponseEntity<UserResponseDTO> updateUser(
-            @PathVariable UUID id,
+            @AuthenticationPrincipal Jwt jwt,
             @Valid @RequestBody UserUpdateDTO requestDTO) {
 
-        UserResponseDTO userResponse = userService.updateUser(id, requestDTO);
+        UUID supabaseId = UUID.fromString(jwt.getSubject());
+
+        UserResponseDTO userResponse = userService.updateUser(supabaseId, requestDTO);
         return ResponseEntity.ok(userResponse);
     }
 

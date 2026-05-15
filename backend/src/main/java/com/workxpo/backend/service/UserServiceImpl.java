@@ -94,7 +94,6 @@ public class UserServiceImpl implements UserService {
 
         // update the required fields
         Optional.ofNullable(updateRequest.username()).ifPresent(user::setUsername);
-        Optional.ofNullable(updateRequest.email()).ifPresent(user::setEmail);
 
         // update the optional fields
         Optional.ofNullable(updateRequest.institution()).ifPresent(user::setInstitution);

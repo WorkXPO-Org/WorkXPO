@@ -6,9 +6,6 @@ import org.hibernate.validator.constraints.URL;
 
 public record UserUpdateDTO(
 
-        @Email
-        String email,
-
         @Size(min = 3, max = 30)
         String username,
 
