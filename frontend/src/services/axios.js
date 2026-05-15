@@ -12,6 +12,30 @@ api.interceptors.request.use((config) => {
     }
 
     return config;
-})
+}, (error) => {
+    return Promise.reject(error);
+});
+
+// if our token expired, we get rid of it
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+
+        // if the backend returns 401, it means that the token is expire
+        // so we'll remove this token
+        if (error.response && error.response.status === 401) {
+            console.warn("Sessão expirada. Limpando o token...");
+            localStorage.removeItem("supabase_token");
+
+            // we redirect the user to the home page
+            if (window.location.pathname != "/projects") {
+                window.location.href = "/";
+            }
+        }
+        return Promise.reject(error);
+    }
+);
+
+
 
 export default api;
