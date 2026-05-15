@@ -18,6 +18,7 @@ public record ProjectResponseDTO(
         List<UserResponseDTO> studentsGroup,
         UserResponseDTO studentLeader,
         String readmeUrl,
-        String imageUrl
+        String imageUrl,
+        String contactLink
 ) { }
 

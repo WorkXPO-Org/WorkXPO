@@ -5,6 +5,7 @@ import com.workxpo.backend.model.enums.HelpStatus;
 import com.workxpo.backend.model.enums.ProjectStatus;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,7 +42,6 @@ public class Project {
     @Column(name = "project_advisor")
     private String advisor;
 
-    // change to user
     @ManyToMany
     @JoinTable(
             name = "project_students",
@@ -64,7 +64,9 @@ public class Project {
     @Column(name = "project_status_help", nullable = false)
     private HelpStatus statusHelp;
 
+    // changed to email to patternize the contactLink
     @NotBlank(message = "Contact link must not be blank")
+    @Email
     @Column(name = "project_contact_link", nullable = false)
     private String contactLink;
 

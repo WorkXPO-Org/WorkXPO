@@ -44,7 +44,8 @@ public class ProjectDTOMapper {
                         .toList(),
                 userMapper.toResponseDTO(project.getStudentLeader()),
                 project.getReadmeUrl(),
-                project.getImageUrl()
+                project.getImageUrl(),
+                project.getContactLink()
         );
     }
 
