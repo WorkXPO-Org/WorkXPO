@@ -22,7 +22,7 @@ export default function SignIn() {
 
       if (data?.session) {
         const token = data.session.access_token;
-        localStorage.setItem("workxpo_token", token);
+        localStorage.setItem("supabase_token", token);
 
         const emailFromSupabase = data.user.email;
         const usernameFromSupabase = data.user.user_metadata?.username;
