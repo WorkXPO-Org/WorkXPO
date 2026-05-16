@@ -6,7 +6,7 @@ import About from "./components/About/About";
 import SignIn from "./components/Auth/SignIn";
 import SignUp from "./components/Auth/SignUp";
 import MetricsDashboard from "./components/Metrics/MetricsDashboard";
-import ProjectDetails from "./components/ProjectDetails/ProjectDetails";
+import ProjectDetails from "./components/Projects/ProjectDetails";
 import EditProfile from "./components/Profile/EditProfile";
 import ProfileDetails from "./components/Profile/ProfileDetails";
 

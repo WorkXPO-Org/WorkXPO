@@ -52,11 +52,11 @@ export default function ProfileDetails() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="text-text-slate text-sm font-bold block mb-1 uppercase">Instituição</label>
-                <p className="text-lg text-text-main">{profile?.institution || "Não informada"}</p>
+                <p className="text-lg text-text-main uppercase">{profile?.institution || "Não informada"}</p>
               </div>
               <div>
                 <label className="text-text-slate text-sm font-bold block mb-1 uppercase">Curso</label>
-                <p className="text-lg text-text-main">{profile?.course || "Não informado"}</p>
+                <p className="text-lg text-text-main capitalize">{profile?.course || "Não informado"}</p>
               </div>
             </div>
 
