@@ -14,13 +14,9 @@ import com.workxpo.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,7 +26,6 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectRepository projectRepository;
     private final ProjectDTOMapper projectDTOMapper;
     private final UserRepository userRepository;
-    private final UserService userService;
 
     @Override
     public List<ProjectMinResponseDTO> findAllProjectsForShowcase() {
@@ -96,11 +91,29 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional
     public ProjectResponseDTO createProject(ProjectCreateDTO projectRequest, UUID studentId) {
 
-        // TODO: Verify if the method is working or changes in the ProjectCreateDTO are needed.
-        User studentLeader = userService.findEntityById(studentId);
-
+        // map the project
         Project project = projectDTOMapper.toEntity(projectRequest);
-        project.setStudentLeader(studentLeader);
+
+        // bind the user leader to the project
+        User leader = userRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Authenticated user profile not found"));
+        project.setStudentLeader(leader);
+
+        // map the students if they exists
+        if (projectRequest.studentsGroup() != null && !projectRequest.studentsGroup().isEmpty()) {
+            List<User> participants = projectRequest.studentsGroup()
+                    .stream()
+                    .map(email ->
+                            userRepository.findByEmail(email)
+                            .orElseThrow(
+                                () -> new RuntimeException("O estudante com o e-mail" + email + " não está cadastrado."))
+                            )
+                            .toList();
+
+            project.setStudentsGroup(participants);
+        } else {
+            project.setStudentsGroup(new ArrayList<>());
+        }
 
         Project savedProject = projectRepository.save(project);
         return projectDTOMapper.toResponseDTO(savedProject);

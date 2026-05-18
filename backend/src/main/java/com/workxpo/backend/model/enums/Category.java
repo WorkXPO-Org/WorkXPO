@@ -3,7 +3,7 @@ package com.workxpo.backend.model.enums;
 public enum Category {
 
     HEALTH("Saúde"),
-    MARKETING("MARKETING"),
+    MARKETING("Marketing"),
     TECHNOLOGY("Tecnologia"),
     LITERATURE("Literatura"),
     INDUSTRY("Indústria"),

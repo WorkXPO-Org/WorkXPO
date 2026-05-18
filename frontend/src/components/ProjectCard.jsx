@@ -32,7 +32,7 @@ export default function ProjectCard({ project }) {
       </div>
 
       <div className="p-5 flex flex-col grow">
-        <h3 className="text-lg font-bold leading-tight text-text-main mb-4 line-clamp-2 grow">
+        <h3 className="text-lg font-bold leading-tight text-text-main mb-4 line-clamp-2 grow capitalize">
           {title}
         </h3>
 

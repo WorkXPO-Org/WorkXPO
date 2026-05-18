@@ -9,6 +9,7 @@ import MetricsDashboard from "./components/Metrics/MetricsDashboard";
 import ProjectDetails from "./components/Projects/ProjectDetails";
 import EditProfile from "./components/Profile/EditProfile";
 import ProfileDetails from "./components/Profile/ProfileDetails";
+import SubmitProject from "./components/Projects/SubmitProject";
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
         <Route path="/projects" element={<Showcase />} />
 
         <Route path="/projects/:id" element={<ProjectDetails />} />
+
+        <Route path="/projects/submit" element={<SubmitProject />} />
 
 
         {/* extra pages */}

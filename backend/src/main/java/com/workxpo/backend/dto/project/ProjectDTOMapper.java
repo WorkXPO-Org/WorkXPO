@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Component
@@ -56,6 +57,13 @@ public class ProjectDTOMapper {
         project.setStatusProject(dto.statusProject());
         project.setStatusHelp(dto.statusHelp());
         project.setContactLink(dto.contactLink());
+
+        // added the optional fields if the user wants to set them in the creation
+        Optional.ofNullable(dto.description()).ifPresent(project::setDescription);
+        Optional.ofNullable(dto.institution()).ifPresent(project::setInstitution);
+        Optional.ofNullable(dto.advisor()).ifPresent(project::setAdvisor);
+        Optional.ofNullable(dto.readmeUrl()).ifPresent(project::setReadmeUrl);
+        Optional.ofNullable(dto.imageUrl()).ifPresent(project::setImageUrl);
 
         return project;
     }

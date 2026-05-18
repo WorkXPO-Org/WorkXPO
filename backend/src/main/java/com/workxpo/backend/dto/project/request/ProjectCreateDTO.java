@@ -7,6 +7,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.URL;
+
+import java.util.List;
 
 public record ProjectCreateDTO(
 
@@ -25,5 +28,23 @@ public record ProjectCreateDTO(
 
         @NotBlank
         @Email
-        String contactLink
+        String contactLink,
+
+        // optional data
+        @Size(max = 350, message = "Description must not exceed 350 characters")
+        String description,
+
+        @Size(max = 100, message = "Institution name must not exceed 100 characters")
+        String institution,
+
+        @Size(max = 80, message = "Advisor name must not exceed 80 characters")
+        String advisor,
+
+        @URL(message = "Please provide a valid README URL")
+        String readmeUrl,
+
+        @URL(message = "Please provide a valid Image URL")
+        String imageUrl,
+
+        List<String> studentsGroup
 ) { }

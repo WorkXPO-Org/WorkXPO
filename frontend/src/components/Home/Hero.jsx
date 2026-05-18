@@ -16,8 +16,9 @@ export default function Hero() {
           reconhecimento que o seu talento merece.
         </p>
 
+        {/* redirect us to the submit page */}
         <button className="bg-primary text-xl text-text-light px-8 py-3 rounded-xl font-bold hover:bg-dark transition-all">
-          <Link to="/submit-project">Envie seu Projeto</Link>
+          <Link to="/projects/submit">Envie seu Projeto</Link>
         </button>
       </div>
 
