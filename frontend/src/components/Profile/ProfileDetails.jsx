@@ -68,7 +68,7 @@ export default function ProfileDetails() {
             <div>
               <label className="text-text-slate text-sm font-bold block mb-1 uppercase">Biografia / Descrição</label>
               <p className="text-lg text-text-main leading-relaxed italic">
-                "{profile?.description || "Estudante focado em inovação e aderência à ODS 9."}"
+                "{profile?.description || "Estudante focado em inovação."}"
               </p>
             </div>
 

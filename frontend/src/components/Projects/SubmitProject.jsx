@@ -120,7 +120,7 @@ export default function SubmitProject() {
         </h2>
         <p className="text-text-slate mb-6 text-sm">
           Preencha a ficha técnica do seu projeto acadêmico para conectá-lo ao
-          mercado (ODS 9).
+          mercado.
         </p>
 
         {errorMsg && (
