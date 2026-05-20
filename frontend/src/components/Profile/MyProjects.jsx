@@ -83,6 +83,19 @@ export default function MyProjects() {
                   className="w-5 h-5 brightness-0 invert"
                 />
               </button>
+
+              {/* edit button */}
+              <div className="absolute top-2 right-12 flex gap-2">
+                <button
+                  onClick={() => navigate(`/projects/edit/${project.id}`)}
+                  className="bg-accent text-dark p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg hover:bg-primary"
+                  title="Editar projeto"
+                >
+                  <img src="/edit-icon.svg" 
+                  alt="Ícone de lápis e papel para editar"
+                  className="w-5 h-5 brightness-0 invert"/>
+                </button>
+              </div>
             </div>
           ))}
         </div>

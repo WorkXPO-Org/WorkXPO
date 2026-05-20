@@ -37,7 +37,12 @@ function App() {
 
         <Route path="/projects/:id" element={<ProjectDetails />} />
 
+        {/* 
+          we call the same component, 
+          but one path is to submit and the other to edit the project 
+        */}
         <Route path="/projects/submit" element={<SubmitProject />} />
+        <Route path="/projects/edit/:id" element={<SubmitProject />} />
 
 
         {/* extra pages */}
