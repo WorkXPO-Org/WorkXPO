@@ -1,14 +1,28 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Header() {
   const MENU_ITEMS = [
     { label: "Home", path: "/" },
     { label: "Vitrine de Projetos", path: "/projects" },
+    { label: "Indicadores", path: "/metrics" },
     { label: "Sobre", path: "/about" },
   ];
 
+  // verify if the user is authenticated and returns the token state (true or false)
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const token = localStorage.getItem("supabase_token");
+    return !!token;
+  });
+
+  // remove the token and set the user auth to false
+  const handleLogout = () => {
+    localStorage.removeItem("supabase_token");
+    setIsAuthenticated(false);
+  };
+
   return (
-    <header className="header">
+    <header className="header shadow-md">
       <div className="flex-1">
         <h1 className="text-3xl font-bold text-text-main">
           <Link to="/">WorkXPO</Link>
@@ -16,12 +30,12 @@ export default function Header() {
       </div>
 
       <nav className="flex-none">
-        <ul className="flex gap-10 text-xl font-bold text-text-main">
+        <ul className="flex gap-10 text-lg font-semibold text-text-main font-sans">
           {MENU_ITEMS.map((item) => (
-            <li key={item}>
+            <li key={item.path}>
               <Link
                 to={item.path}
-                className="hover:text-dark transition-colors"
+                className="hover:text-dark transition-colors duration-300"
               >
                 {item.label}
               </Link>
@@ -30,21 +44,38 @@ export default function Header() {
         </ul>
       </nav>
 
-      <div className="flex-1 flex justify-end items-center gap-4">
-        <Link
-          to="/login"
-          className="text-text-main font-semibold hover:underline"
-        >
-          Entrar
-        </Link>
+      {isAuthenticated ? (
+        <div className="flex-1 flex justify-end items-center gap-6">
+          <Link
+            to="/profile/details"
+            className=" bg-dark text-white px-6 py-2 rounded-full font-bold hover:bg-dark/90 transition-all shadow-md font-sans"
+          >
+            Meu Perfil
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="text-text-main font-semibold hover:text-dark transition-colors font-sans"
+          >
+            Sair
+          </button>
+        </div>
+      ) : (
+        <div className="flex-1 flex justify-end items-center gap-6">
+          <Link
+            to="/signin"
+            className="text-text-main font-semibold hover:text-dark transition-colors font-sans"
+          >
+            Entrar
+          </Link>
 
-        <Link
-          to="/register"
-          className="bg-dark text-white px-5 py-2 rounded-full font-bold hover:bg-dark/90 transition-all shadow-sm"
-        >
-          Criar Conta
-        </Link>
-      </div>
+          <Link
+            to="/signup"
+            className="bg-dark text-white px-6 py-2 rounded-full font-bold hover:bg-dark/90 transition-all shadow-md font-sans"
+          >
+            Criar Conta
+          </Link>
+        </div>
+      )}
     </header>
   );
 }

@@ -1,0 +1,31 @@
+package com.workxpo.backend.service;
+
+import com.workxpo.backend.dto.project.request.ProjectCreateDTO;
+import com.workxpo.backend.dto.project.request.ProjectUpdateDTO;
+import com.workxpo.backend.dto.project.response.ProjectMinResponseDTO;
+import com.workxpo.backend.dto.project.response.ProjectResponseDTO;
+import com.workxpo.backend.model.User;
+import com.workxpo.backend.model.enums.Category;
+
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public interface ProjectService {
+
+    List<ProjectMinResponseDTO> findAllProjectsForShowcase();
+
+    ProjectResponseDTO findProjectById(Long id);
+
+    List<ProjectMinResponseDTO> findAllProjectsByAuthenticatedUser(UUID userId);
+
+    List<ProjectMinResponseDTO> filterProjectByCategory(Category category);
+
+    Map<Category, Double> calculateICPByEachCategory();
+
+    ProjectResponseDTO createProject(ProjectCreateDTO projectRequest, UUID studentId);
+
+    ProjectResponseDTO updateProject(Long id, ProjectUpdateDTO dto, UUID userId);
+
+    void deleteProjectById(Long id, UUID userId);
+}

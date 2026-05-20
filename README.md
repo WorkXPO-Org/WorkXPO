@@ -1,4 +1,7 @@
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![React](https://img.shields.io/badge/react-%23202322.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 
@@ -19,20 +22,21 @@
   - **Autenticação e Autorização:** Sistema de login seguro, garantindo que os usuários gerenciem apenas seus próprios projetos e dados.
   - **Vitrine Responsiva:** Uma interface moderna e centralizada para explorar projetos por categoria.
 
-  ## 🛠Tecnologias
+  ## Tecnologias
 
   ### Frontend
   - **React.js**: Para a criação de uma interface dinâmica.
   - **TailwindCSS**: Para estilização moderna, baseada em utilitários e design responsivo.
 
   ### Backend
-  - *Decisão em andamento* (Atualmente explorando as melhores opções de escalabilidade para a API e o Banco de Dados).
+  - **Spring**: Para um desenvolvimento melhor e mais fácil do backend.
+  - **Supabase**: Para autenticação e autorização.
 
   ## Desenvolvedores
-    - **Bruno da Silva**
-    - **Lázaro Kauã**
-    - **Rafael Oliveira**
-    - **Valmir Orçai**
+  - **Bruno da Silva**
+  - **Lázaro Kauã**
+  - **Rafael Oliveira**
+  - **Valmir Orçai**
 
 </details>
 
@@ -61,7 +65,8 @@ The platform is being built to provide experiences for both students and compani
 - **TailwindCSS**: For modern, utility-first styling and responsive design.
 
 ### Backend
-- *Decision in progress* (Currently exploring the best scalability options for the API and Database).
+- **Spring**: For a better and easier backend development.
+- **Supabase**: For authentication and authorization.
 
 ## Developers
 

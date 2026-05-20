@@ -9,6 +9,8 @@
   --color-secondary: #ecfeff;
   --color-accent: #22d3ee;
   --color-dark: #164e63;
+  --color-light-dark: #1c637d;
+  --color-slate: #334155;
 
   --color-text-main: #083344;
   --color-text-light: #ecfeff;
@@ -48,5 +50,9 @@
 
   .header {
     @apply bg-primary p-5 border-dark/20 flex flex-row items-center justify-between;
+  }
+
+  .form-fields {
+    @apply w-full p-2 mb-4 border rounded border-gray-300 text-slate;
   }
 }

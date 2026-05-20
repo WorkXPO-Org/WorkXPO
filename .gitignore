@@ -1,0 +1,25 @@
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Eclipse
+.settings/
+.project
+.classpath
+
+# Node / React
+node_modules/
+build/
+dist/
+.env
+
+# Sistema / Logs
+*.log
+.DS_Store
