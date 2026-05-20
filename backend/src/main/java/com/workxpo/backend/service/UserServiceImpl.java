@@ -8,9 +8,14 @@ import com.workxpo.backend.model.User;
 import com.workxpo.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -21,6 +26,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserDTOMapper userDTOMapper;
+
+    @Value("${supabase.url}")
+    private String supabaseUrl;
+    @Value("${supabase.service-role-key}")
+    private String serviceRoleKey;
+    private final RestTemplate restTemplate = new RestTemplate();
 
     @Override
     public List<UserResponseDTO> findAllUsers() {
@@ -75,16 +86,6 @@ public class UserServiceImpl implements UserService {
     }
      */
 
-
-    @Override
-    @Transactional
-    public void deleteUserById(UUID supabaseId) {
-        User user = userRepository.findById(supabaseId)
-                .orElseThrow(() -> new RuntimeException("User does not exist"));
-
-        userRepository.delete(user);
-    }
-
     @Transactional
     @Override
     public UserResponseDTO updateUser(UUID supabaseId, UserUpdateDTO updateRequest) {
@@ -104,4 +105,27 @@ public class UserServiceImpl implements UserService {
         return userDTOMapper.toResponseDTO(user);
     }
 
+    @Transactional
+    @Override
+    public void deleteUserById(UUID userId) {
+        // we delete the user via admin
+        String url = supabaseUrl + "/auth/v1/admin/users/" + userId;
+
+        // pass the credentials
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("apikey", serviceRoleKey);
+        headers.set("Authorization", "Bearer " + serviceRoleKey);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        try {
+            restTemplate.exchange(url, HttpMethod.DELETE, entity, Void.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao deletar usuário no Supabase Auth: " + e.getMessage());
+        }
+
+        // delete the user and projects binded to him in the db
+        userRepository.deleteById(userId);
+    }
 }

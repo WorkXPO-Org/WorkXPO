@@ -1,14 +1,11 @@
 package com.workxpo.backend.controller;
 
-
-import com.nimbusds.jwt.JWT;
 import com.workxpo.backend.dto.user.request.UserCreateDTO;
 import com.workxpo.backend.dto.user.response.UserResponseDTO;
 import com.workxpo.backend.dto.user.request.UserUpdateDTO;
 import com.workxpo.backend.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -75,9 +72,12 @@ public class UserController {
         return ResponseEntity.ok(userResponse);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
-        userService.deleteUserById(id);
+    @DeleteMapping()
+    public ResponseEntity<Void> deleteUser(@AuthenticationPrincipal Jwt jwt) {
+
+        UUID supabaseId = UUID.fromString(jwt.getSubject());
+
+        userService.deleteUserById(supabaseId);
 
         return ResponseEntity.noContent().build();
     }
