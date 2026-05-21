@@ -117,13 +117,25 @@ export default function ProjectDetails() {
               <p className="text-lg">{project.advisor || "Sem orientador"}</p>
             </div>
 
+            {/* student leader */}
             <div>
               <p className="text-xs text-primary font-bold uppercase tracking-tighter">
                 Líder do Grupo
               </p>
-              <p className="text-lg font-bold">
-                {project.studentLeader?.username}
-              </p>
+              <div className="group flex items-center">
+                <a
+                  href={`mailto:${project.studentLeader?.email}`}
+                  className="text-lg font-bold hover:text-accent transition-colors duration-200"
+                  title={`Enviar e-mail para ${project.studentLeader?.username}`}
+                >
+                  {project.studentLeader?.username?.split(" ")[0]}
+                </a>
+
+                {/* leader e-mail */}
+                <span className="ml-2 text-xs text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  ({project.studentLeader?.email})
+                </span>
+              </div>
             </div>
 
             <div>
@@ -143,7 +155,7 @@ export default function ProjectDetails() {
                         className="font-medium hover:text-accent transition-colors duration-200"
                         title={`Enviar e-mail para ${student.username}`}
                       >
-                        {student.username}
+                        {student.username?.split(" ")[0]}
                       </a>
 
                       {/* when we hover the mouse we can see the email slowly appearing */}
