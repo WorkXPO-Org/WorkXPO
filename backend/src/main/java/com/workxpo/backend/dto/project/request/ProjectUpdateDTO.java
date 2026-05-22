@@ -23,7 +23,7 @@ public record ProjectUpdateDTO(
         @Size(max = 80)
         String advisor,
 
-        List<UUID> studentsGroup,
+        List<String> studentsGroup,
 
         @URL
         String readmeUrl,

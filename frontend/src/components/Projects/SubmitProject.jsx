@@ -34,7 +34,16 @@ export default function SubmitProject() {
       api
         .get(`/projects/${id}`)
         .then((response) => {
-          setFormData(response.data);
+          // Extrai o studentsGroup do response para ele não ir para o formData
+          const { studentsGroup: fetchedStudents, ...projectData } = response.data;
+          
+          setFormData(projectData);
+
+          // Pega apenas os e-mails dos integrantes que vieram do banco e joga no estado
+          if (fetchedStudents && Array.isArray(fetchedStudents)) {
+            const emails = fetchedStudents.map(student => student.email);
+            setStudentsGroup(emails);
+          }
         })
         .catch((error) => {
           console.error("Erro ao buscar os dados: ", error);
@@ -104,7 +113,7 @@ export default function SubmitProject() {
 
     try {
       if (isEditMode) {
-        await api.patch(`/projects/${id}`, formData);
+        await api.patch(`/projects/${id}`, sanitizedPayload);
         alert("Projeto Atualizado com sucesso!");
       } else {
         await api.post("/projects/create", sanitizedPayload);
