@@ -7,6 +7,9 @@ server:
   servlet:
     context-path: /api
 
+cors:
+  allowed-origins: ${FRONTEND_URL:http://localhost:5173}
+
 spring:
   application:
     name: backend
