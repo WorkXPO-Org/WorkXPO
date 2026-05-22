@@ -145,16 +145,13 @@ public class ProjectServiceImpl implements ProjectService {
         Optional.ofNullable(dto.category()).ifPresent(project::setCategory);
         Optional.ofNullable(dto.contactLink()).ifPresent(project::setContactLink);
 
-        Optional.ofNullable(dto.studentsGroup()).ifPresent(ids -> {
+        Optional.ofNullable(dto.studentsGroup()).ifPresent(emails -> {
+            List<User> participants = emails.stream()
+                    .map(email -> userRepository.findByEmail(email)
+                            .orElseThrow(() -> new RuntimeException("O estudante com o e-mail " + email + " não está cadastrado.")))
+                    .collect(Collectors.toList());;
 
-            List<User> users = userRepository.findAllById(ids);
-
-            // verify if the ids does exist
-            if (users.size() != ids.size()) {
-                throw new RuntimeException("One or more ids in the group were not found");
-            }
-
-            project.setStudentsGroup(users);
+            project.setStudentsGroup(participants);
         });
 
         return projectDTOMapper.toResponseDTO(projectRepository.save(project));

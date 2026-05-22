@@ -71,6 +71,7 @@ export default function About() {
               </div>
               <p>
                 Frontend: <strong>React.js</strong> para criar a interface dinâmica e <strong>TailwindCSS</strong> para estilização moderna e responsiva.
+                <br/>
                 Backend: <strong>Java</strong> com <strong>Supabase</strong> para gerenciar autenticação, banco de dados e APIs.
               </p>
             </div>

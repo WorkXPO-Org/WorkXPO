@@ -1,12 +1,16 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../../services/axios";
 import Header from "../Header";
+import RestrictedAccess from "../Auth/RestrictedAccess";
 
 export default function SubmitProject() {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [emailInput, setEmailInput] = useState("");
+  const [studentsGroup, setStudentsGroup] = useState([]);
 
   // this form is based off the atributtes of our projectDTO
   const [formData, setFormData] = useState({
@@ -22,31 +26,34 @@ export default function SubmitProject() {
     institution: "",
   });
 
-  const [emailInput, setEmailInput] = useState("");
-  const [studentsGroup, setStudentsGroup] = useState([]);
+  // initial loading to edit the project
+  const isEditMode = !!id;
+  const [fetchingData, setFetchingData] = useState(isEditMode);
+  useEffect(() => {
+    if (isEditMode) {
+      api
+        .get(`/projects/${id}`)
+        .then((response) => {
+          // we extract the studentsGroup to not send them to the formData
+          const { studentsGroup: fetchedStudents, ...projectData } = response.data;
+          
+          setFormData(projectData);
 
-  // if the user isnt authenticated, we send him to the login page
-  const token = localStorage.getItem("supabase_token");
-  const isAuthenticated = !!token;
-  if (!isAuthenticated) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] p-10 text-center">
-        <div className="bg-secondary border-t-4 border-dark text-text-main p-6 rounded-lg shadow-md max-w-md">
-          <h2 className=" text-2xl mb-4">Acesso Restrito</h2>
-          <p className="mb-6 font-sans">
-            Você precisa estar logado para submeter sua inovação acadêmica ao{" "}
-            <strong>Projeto WorkXPO</strong>.
-          </p>
-          <button
-            onClick={() => navigate("/signin")}
-            className="bg-dark text-white px-6 py-2 rounded-lg hover:bg-light-dark transition-colors"
-          >
-            Ir para a página de Login
-          </button>
-        </div>
-      </div>
-    );
-  }
+          // take the students email and thow them in the state
+          if (fetchedStudents && Array.isArray(fetchedStudents)) {
+            const emails = fetchedStudents.map(student => student.email);
+            setStudentsGroup(emails);
+          }
+        })
+        .catch((error) => {
+          console.error("Erro ao buscar os dados: ", error);
+          setErrorMsg("Não foi possível carregar os dados do projeto");
+        })
+        .finally(() => {
+          setFetchingData(false);
+        });
+    }
+  }, [id, isEditMode]);
 
   const handleChange = (e) => {
     setFormData({
@@ -84,6 +91,13 @@ export default function SubmitProject() {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
+  // if the user isnt authenticated, we send him to the login page
+  const token = localStorage.getItem("supabase_token");
+  const isAuthenticated = !!token;
+  if (!isAuthenticated) {
+    return <RestrictedAccess />;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -98,8 +112,15 @@ export default function SubmitProject() {
     };
 
     try {
-      await api.post("/projects/create", sanitizedPayload);
-      navigate("/projects");
+      if (isEditMode) {
+        await api.patch(`/projects/${id}`, sanitizedPayload);
+        alert("Projeto Atualizado com sucesso!");
+      } else {
+        await api.post("/projects/create", sanitizedPayload);
+        alert("Projeto Criado com sucesso!");
+      }
+
+      navigate("/profile/details");
     } catch (err) {
       console.error("Erro ao submeter o projeto:", err);
       const backendMessage =
@@ -110,17 +131,23 @@ export default function SubmitProject() {
     }
   };
 
+  // if the project is still loading we alert the user
+  if (fetchingData) {
+    return <div className="text-center p-10 text-dark">Carregando dados do projeto...</div>;
+  }
+
+
   return (
     <div className="min-h-screen bg-secondary text-text-main font-sans">
       <Header />
 
       <main className="max-w-4xl mx-auto p-6 my-10 bg-cyan-brighter rounded-lg shadow-md border border-dark/10">
         <h2 className="font-bold text-3xl text-dark mb-2">
-          Submeter Nova Inovação
+          {isEditMode ? "Edição do Projeto" : "Criar Novo Projeto"}
         </h2>
         <p className="text-text-slate mb-6 text-sm">
           Preencha a ficha técnica do seu projeto acadêmico para conectá-lo ao
-          mercado (ODS 9).
+          mercado.
         </p>
 
         {errorMsg && (
@@ -378,7 +405,9 @@ export default function SubmitProject() {
               disabled={loading}
               className="bg-primary text-text-main px-8 py-2.5 rounded text-sm font-bold shadow hover:bg-accent transition-colors disabled:opacity-50 flex items-center justify-center"
             >
-              {loading ? "Publicando..." : "Publicar Projeto"}
+              {loading 
+                  ? "Salvando..." 
+                  : (isEditMode ? "Atualizar projeto" : "Publicar Projeto")}
             </button>
           </div>
         </form>

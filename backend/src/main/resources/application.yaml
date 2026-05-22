@@ -1,3 +1,7 @@
+supabase:
+  url: ${SUPABASE_URL}
+  service-role-key: ${SUPABASE_SERVICE_ROLE_KEY}
+
 server:
   port: 8080
   servlet:
